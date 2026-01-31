@@ -1,0 +1,406 @@
+{
+  "brand_name": {
+    "message": "RixAI",
+    "description": "Название бренда"
+  },
+  "extName": {
+    "message": "RixAI",
+    "description": "Название расширения"
+  },
+  "extDescription": {
+    "message": "Современный помощник NotebookLM для быстрого добавления, массового импорта и плейлистов YouTube.",
+    "description": "Описание расширения"
+  },
+  "popup_title": {
+    "message": "RixAI",
+    "description": "Заголовок popup"
+  },
+  "popup_tagline": {
+    "message": "Современное добавление в ваши ноутбуки",
+    "description": "Подзаголовок в шапке"
+  },
+  "popup_currentPage": {
+    "message": "Текущая страница:",
+    "description": "Метка текущей страницы"
+  },
+  "popup_selectNotebook": {
+    "message": "Добавить в ноутбук:",
+    "description": "Метка выбора ноутбука"
+  },
+  "popup_addToNotebook": {
+    "message": "Добавить в ноутбук",
+    "description": "Текст кнопки добавления"
+  },
+  "popup_addVideo": {
+    "message": "Добавить видео в ноутбук",
+    "description": "Текст кнопки добавления видео"
+  },
+  "popup_addPlaylist": {
+    "message": "Добавить плейлист в ноутбук",
+    "description": "Текст кнопки добавления плейлиста"
+  },
+  "popup_addAllPlaylist": {
+    "message": "Добавить все видео из плейлиста",
+    "description": "Текст кнопки добавления всех видео"
+  },
+  "popup_addChannelVideos": {
+    "message": "Добавить видео канала в ноутбук",
+    "description": "Текст кнопки добавления видео канала"
+  },
+  "popup_createNotebook": {
+    "message": "Создать новый ноутбук",
+    "description": "Кнопка создания ноутбука"
+  },
+  "popup_bulkImport": {
+    "message": "Массовый импорт",
+    "description": "Кнопка массового импорта"
+  },
+  "popup_fromTabs": {
+    "message": "Из вкладок",
+    "description": "Кнопка импорта из вкладок"
+  },
+  "popup_loading": {
+    "message": "Загрузка...",
+    "description": "Состояние загрузки"
+  },
+  "popup_loadingNotebooks": {
+    "message": "Загрузка ноутбуков...",
+    "description": "Загрузка ноутбуков"
+  },
+  "popup_success": {
+    "message": "Успешно добавлено!",
+    "description": "Сообщение об успехе"
+  },
+  "popup_error": {
+    "message": "Не удалось добавить. Попробуйте ещё раз.",
+    "description": "Сообщение об ошибке"
+  },
+  "popup_loginRequired": {
+    "message": "Сначала войдите в NotebookLM",
+    "description": "Сообщение о необходимости входа"
+  },
+  "popup_noNotebooks": {
+    "message": "Ноутбуки не найдены",
+    "description": "Сообщение об отсутствии ноутбуков"
+  },
+  "popup_tools": {
+    "message": "Инструменты:",
+    "description": "Метка секции инструментов"
+  },
+  "popup_openNotebook": {
+    "message": "Открыть ноутбук",
+    "description": "Кнопка открытия ноутбука"
+  },
+  "popup_cancel": {
+    "message": "Отмена",
+    "description": "Кнопка отмены"
+  },
+  "popup_createAndAdd": {
+    "message": "Создать и добавить",
+    "description": "Кнопка создания и добавления"
+  },
+  "popup_notebookName": {
+    "message": "Название ноутбука",
+    "description": "Placeholder названия ноутбука"
+  },
+  "popup_extractingVideos": {
+    "message": "Извлечение видео из",
+    "description": "Сообщение об извлечении видео"
+  },
+  "popup_addingVideos": {
+    "message": "Добавление видео в ноутбук...",
+    "description": "Сообщение о добавлении видео"
+  },
+  "popup_noVideosFound": {
+    "message": "Видео не найдены. Попробуйте прокрутить страницу вниз для загрузки видео, затем попробуйте снова.",
+    "description": "Сообщение об отсутствии видео"
+  },
+  "popup_videosAdded": {
+    "message": "видео добавлено!",
+    "description": "Сообщение о добавленных видео"
+  },
+  "popup_addedTo": {
+    "message": "Добавлено в",
+    "description": "Префикс добавления"
+  },
+  "popup_playlist": {
+    "message": "Плейлист",
+    "description": "Метка плейлиста"
+  },
+  "popup_videoFromPlaylist": {
+    "message": "Видео из плейлиста",
+    "description": "Метка видео из плейлиста"
+  },
+  "popup_clickToAddAll": {
+    "message": "Нажмите, чтобы добавить все видео",
+    "description": "Подсказка о добавлении всех"
+  },
+  "popup_channel": {
+    "message": "Канал",
+    "description": "Метка канала"
+  },
+  "bulk_title": {
+    "message": "Массовый импорт",
+    "description": "Заголовок страницы массового импорта"
+  },
+  "bulk_description": {
+    "message": "Импортируйте несколько ссылок и вкладок в NotebookLM за секунды",
+    "description": "Описание массового импорта"
+  },
+  "bulk_linksTab": {
+    "message": "Ссылки",
+    "description": "Вкладка ссылок"
+  },
+  "bulk_tabsTab": {
+    "message": "Вкладки браузера",
+    "description": "Вкладка браузерных вкладок"
+  },
+  "bulk_settingsTab": {
+    "message": "Настройки",
+    "description": "Вкладка настроек"
+  },
+  "bulk_selectNotebook": {
+    "message": "Выберите ноутбук",
+    "description": "Заголовок выбора ноутбука"
+  },
+  "bulk_pasteLinks": {
+    "message": "Вставьте ссылки",
+    "description": "Заголовок секции ссылок"
+  },
+  "bulk_enterUrls": {
+    "message": "Введите URL (по одному на строку):",
+    "description": "Метка поля ввода URL"
+  },
+  "bulk_linksDetected": {
+    "message": "Обнаружено ссылок: $COUNT$",
+    "description": "Счётчик ссылок",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "5"
+      }
+    }
+  },
+  "bulk_importLinks": {
+    "message": "Импортировать ссылки",
+    "description": "Кнопка импорта ссылок"
+  },
+  "bulk_selectTabs": {
+    "message": "Выберите вкладки браузера",
+    "description": "Заголовок секции вкладок"
+  },
+  "bulk_selectAll": {
+    "message": "Выбрать все",
+    "description": "Чекбокс выбора всех"
+  },
+  "bulk_tabsSelected": {
+    "message": "Выбрано вкладок: $COUNT$",
+    "description": "Счётчик вкладок",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "3"
+      }
+    }
+  },
+  "bulk_importTabs": {
+    "message": "Импортировать выбранные вкладки",
+    "description": "Кнопка импорта вкладок"
+  },
+  "bulk_importing": {
+    "message": "Импорт $CURRENT$ из $TOTAL$...",
+    "description": "Прогресс импорта",
+    "placeholders": {
+      "current": {
+        "content": "$1",
+        "example": "5"
+      },
+      "total": {
+        "content": "$2",
+        "example": "10"
+      }
+    }
+  },
+  "bulk_success": {
+    "message": "Успешно импортировано элементов: $COUNT$!",
+    "description": "Сообщение об успехе",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "10"
+      }
+    }
+  },
+  "bulk_openNotebook": {
+    "message": "Открыть ноутбук",
+    "description": "Ссылка на открытие ноутбука"
+  },
+  "bulk_createNewNotebook": {
+    "message": "Создать новый ноутбук",
+    "description": "Кнопка создания ноутбука"
+  },
+  "bulk_loadingTabs": {
+    "message": "Загрузка вкладок...",
+    "description": "Загрузка вкладок"
+  },
+  "bulk_noTabs": {
+    "message": "Вкладки не найдены",
+    "description": "Вкладки не найдены"
+  },
+  "bulk_failedToLoad": {
+    "message": "Не удалось загрузить вкладки",
+    "description": "Ошибка загрузки вкладок"
+  },
+  "settings_title": {
+    "message": "Настройки",
+    "description": "Заголовок настроек"
+  },
+  "settings_language": {
+    "message": "Язык:",
+    "description": "Метка выбора языка"
+  },
+  "settings_languageHint": {
+    "message": "Выберите язык интерфейса",
+    "description": "Подсказка выбора языка"
+  },
+  "settings_account": {
+    "message": "Аккаунт Google:",
+    "description": "Метка выбора аккаунта"
+  },
+  "settings_accountHint": {
+    "message": "Выберите аккаунт Google для NotebookLM",
+    "description": "Подсказка выбора аккаунта"
+  },
+  "settings_autoOpen": {
+    "message": "Автоматически открывать ноутбук после добавления источников",
+    "description": "Настройка автооткрытия"
+  },
+  "settings_youtube": {
+    "message": "Настройки YouTube",
+    "description": "Заголовок настроек YouTube"
+  },
+  "settings_youtubeHint": {
+    "message": "Для плейлистов и каналов YouTube используйте кнопки, которые появляются непосредственно на страницах YouTube. Расширение автоматически извлечёт URL-адреса видео с помощью InnerTube API YouTube.",
+    "description": "Подсказка настроек YouTube"
+  },
+  "settings_about": {
+    "message": "О расширении",
+    "description": "Заголовок раздела О расширении"
+  },
+  "settings_aboutText": {
+    "message": "NotebookLM Flow помогает импортировать видео YouTube, веб-страницы и другой контент в NotebookLM.",
+    "description": "Текст о расширении"
+  },
+  "settings_openNotebookLM": {
+    "message": "Открыть NotebookLM",
+    "description": "Кнопка открытия NotebookLM"
+  },
+  "settings_accountChanged": {
+    "message": "Аккаунт изменён. Ноутбуки перезагружены.",
+    "description": "Сообщение об изменении аккаунта"
+  },
+  "youtube_addButton": {
+    "message": "В NotebookLM",
+    "description": "Кнопка добавления на YouTube"
+  },
+  "youtube_addPlaylist": {
+    "message": "Добавить плейлист в NotebookLM",
+    "description": "Кнопка добавления плейлиста"
+  },
+  "youtube_addChannel": {
+    "message": "Добавить видео в NotebookLM",
+    "description": "Кнопка добавления видео канала"
+  },
+  "contextMenu_sendTo": {
+    "message": "Отправить в NotebookLM Flow",
+    "description": "Пункт контекстного меню"
+  },
+  "common_sources": {
+    "message": "источников",
+    "description": "Метка источников"
+  },
+  "common_link": {
+    "message": "ссылка",
+    "description": "Ссылка единственное число"
+  },
+  "common_links": {
+    "message": "ссылок",
+    "description": "Ссылки множественное число"
+  },
+  "common_tab": {
+    "message": "вкладка",
+    "description": "Вкладка единственное число"
+  },
+  "common_tabs": {
+    "message": "вкладок",
+    "description": "Вкладки множественное число"
+  },
+  "common_video": {
+    "message": "видео",
+    "description": "Видео единственное число"
+  },
+  "common_videos": {
+    "message": "видео",
+    "description": "Видео множественное число"
+  },
+  "common_item": {
+    "message": "элемент",
+    "description": "Элемент единственное число"
+  },
+  "common_items": {
+    "message": "элементов",
+    "description": "Элементы множественное число"
+  },
+  "bulk_sourcesTab": {
+    "message": "Управление источниками",
+    "description": "Вкладка управления источниками"
+  },
+  "sources_title": {
+    "message": "Управление источниками",
+    "description": "Заголовок управления источниками"
+  },
+  "sources_selectNotebook": {
+    "message": "Выберите ноутбук для управления:",
+    "description": "Метка выбора ноутбука"
+  },
+  "sources_loadSources": {
+    "message": "Загрузить источники",
+    "description": "Кнопка загрузки источников"
+  },
+  "sources_selectNotebookFirst": {
+    "message": "Выберите ноутбук и нажмите \"Загрузить источники\"",
+    "description": "Текст-подсказка"
+  },
+  "sources_noSources": {
+    "message": "В этом ноутбуке нет источников",
+    "description": "Сообщение об отсутствии источников"
+  },
+  "sources_deleteSelected": {
+    "message": "Удалить выбранные источники",
+    "description": "Кнопка удаления"
+  },
+  "sources_confirmDelete": {
+    "message": "Вы уверены, что хотите удалить ${count} источник(ов)? Это действие нельзя отменить.",
+    "description": "Подтверждение удаления"
+  },
+  "sources_deleting": {
+    "message": "Удаление...",
+    "description": "Сообщение о процессе удаления"
+  },
+  "sources_deletedSuccess": {
+    "message": "Успешно удалено источников: ${count}!",
+    "description": "Сообщение об успешном удалении"
+  },
+  "sources_deleteFailed": {
+    "message": "Не удалось удалить источники",
+    "description": "Сообщение об ошибке удаления"
+  },
+  "settings_enableBulkDelete": {
+    "message": "Включить кнопку массового удаления в NotebookLM",
+    "description": "Настройка массового удаления"
+  },
+  "settings_bulkDeleteHint": {
+    "message": "Показывает кнопку удаления при выборе нескольких источников в NotebookLM",
+    "description": "Подсказка настройки массового удаления"
+  }
+}
