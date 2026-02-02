@@ -61,6 +61,24 @@
     return match ? match[1] : null;
   }
 
+  // Remove deleted source rows from DOM so list updates without page reload
+  function removeDeletedSourcesFromDOM(sourceIds) {
+    sourceIds.forEach(sourceId => {
+      const menuButton = document.querySelector('[id="source-item-more-button-' + sourceId + '"]');
+      if (menuButton) {
+        const container = menuButton.closest('.single-source-container');
+        if (container) container.remove();
+        return;
+      }
+      const containers = document.querySelectorAll('.single-source-container');
+      containers.forEach(container => {
+        if (container.outerHTML.includes(sourceId)) {
+          container.remove();
+        }
+      });
+    });
+  }
+
   // Create the delete button
   function createDeleteButton() {
     if (deleteButton) return deleteButton;
@@ -71,45 +89,29 @@
     deleteButton.style.cssText = `
       display: none;
       align-items: center;
-      gap: 8px;
-      background: #FFFFFF;
-      color: #374151;
-      border: 1px solid #E5E7EB;
-      border-radius: 8px;
-      padding: 6px 12px;
-      font-size: 13px;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.08);
+      color: rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 20px;
+      padding: 8px 16px;
+      font-size: 14px;
       font-weight: 500;
       cursor: pointer;
       font-family: 'Google Sans', Roboto, sans-serif;
-      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: background 0.2s, border-color 0.2s, color 0.2s;
       margin-left: 12px;
       white-space: nowrap;
-      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-      letter-spacing: 0.01em;
     `;
-    
-    // Add icon support
-    const iconSpan = document.createElement('span');
-    iconSpan.textContent = '🗑️';
-    iconSpan.style.fontSize = '14px';
-    
-    // Note: Since we are replacing innerHTML later, we might just include icon in text update
-    // But keeping base styling clean is key.
 
     deleteButton.addEventListener('mouseenter', () => {
-      deleteButton.style.background = '#F9FAFB';
-      deleteButton.style.borderColor = '#D1D5DB';
-      deleteButton.style.boxShadow = '0 2px 4px rgba(0, 0, 0, 0.05)';
-      deleteButton.style.transform = 'translateY(-1px)';
-      deleteButton.style.color = '#111827';
+      deleteButton.style.background = 'rgba(255, 255, 255, 0.14)';
+      deleteButton.style.borderColor = 'rgba(255, 255, 255, 0.35)';
     });
 
     deleteButton.addEventListener('mouseleave', () => {
-      deleteButton.style.background = '#FFFFFF';
-      deleteButton.style.borderColor = '#E5E7EB';
-      deleteButton.style.boxShadow = '0 1px 2px rgba(0, 0, 0, 0.05)';
-      deleteButton.style.transform = 'translateY(0)';
-      deleteButton.style.color = '#374151';
+      deleteButton.style.background = 'rgba(255, 255, 255, 0.08)';
+      deleteButton.style.borderColor = 'rgba(255, 255, 255, 0.2)';
     });
 
     deleteButton.addEventListener('click', handleDeleteClick);
@@ -224,18 +226,9 @@
         alert(reloadMsg);
         resetButton();
       } else {
-        // Show success
-        const successCount = response.successCount || selectedSources.length;
-        const successMsg = lang.startsWith('ru')
-          ? `✓ Удалено: ${successCount}`
-          : `✓ Deleted: ${successCount}`;
-
-        deleteButton.innerHTML = successMsg;
-
-        // Reload page after short delay
-        setTimeout(() => {
-          window.location.reload();
-        }, 1000);
+        // Remove deleted rows from DOM so they disappear immediately
+        removeDeletedSourcesFromDOM(selectedSources);
+        resetButton();
       }
     } catch (error) {
       console.error('Delete error:', error);
@@ -260,7 +253,8 @@
     deleteButton.disabled = false;
     deleteButton.style.opacity = '1';
     deleteButton.style.cursor = 'pointer';
-    deleteButton.style.background = '#FFFFFF';
+    deleteButton.style.background = 'rgba(255, 255, 255, 0.08)';
+    deleteButton.style.borderColor = 'rgba(255, 255, 255, 0.2)';
     updateButtonVisibility();
   }
 
@@ -287,10 +281,9 @@
       deleteButton.style.display = 'flex';
       deleteButton.disabled = false;
       deleteButton.style.opacity = '1';
-    deleteButton.style.background = '#FFFFFF';
-    deleteButton.style.boxShadow = '0 1px 2px rgba(0, 0, 0, 0.05)';
-    deleteButton.style.transform = 'translateY(0)';
-    deleteButton.style.color = '#374151';
+      deleteButton.style.background = 'rgba(255, 255, 255, 0.08)';
+      deleteButton.style.borderColor = 'rgba(255, 255, 255, 0.2)';
+      deleteButton.style.color = 'rgba(255, 255, 255, 0.9)';
     } else {
       deleteButton.style.display = 'none';
     }

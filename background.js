@@ -2,6 +2,21 @@
 // Handles API calls and message passing between content scripts and popup
 
 // ============================================
+// Utilities
+// ============================================
+
+async function fetchWithTimeout(url, options = {}, timeout = 30000) {
+  const controller = new AbortController();
+  const id = setTimeout(() => controller.abort(), timeout);
+  try {
+    const response = await fetch(url, { ...options, signal: controller.signal });
+    return response;
+  } finally {
+    clearTimeout(id);
+  }
+}
+
+// ============================================
 // NotebookLM API Client (inline)
 // ============================================
 
@@ -16,7 +31,7 @@ const NotebookLMAPI = {
         ? `${this.BASE_URL}/?authuser=${authuser}&pageId=none`
         : this.BASE_URL;
 
-      const response = await fetch(url, {
+      const response = await fetchWithTimeout(url, {
         credentials: 'include',
         redirect: 'manual'
       });
@@ -110,11 +125,9 @@ const NotebookLMAPI = {
   // Add multiple sources to notebook
   async addSources(notebookId, urls) {
     const sources = urls.map(url => {
-      // YouTube URLs need special format
       if (url.includes('youtube.com') || url.includes('youtu.be')) {
         return [null, null, null, null, null, null, null, [url]];
       }
-      // Regular URLs
       return [null, null, [url]];
     });
 
@@ -170,7 +183,7 @@ const NotebookLMAPI = {
       'at': this.tokens.at
     });
 
-    const response = await fetch(url.toString(), {
+    const response = await fetchWithTimeout(url.toString(), {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
@@ -189,15 +202,15 @@ const NotebookLMAPI = {
   // Get list of Google accounts (filter out YouTube channels/profiles)
   async listAccounts() {
     try {
-      const response = await fetch(
+      const response = await fetchWithTimeout(
         'https://accounts.google.com/ListAccounts?json=standard&source=ogb&md=1&cc=1&mn=1&mo=1&gpsia=1&fwput=860&listPages=1&origin=https%3A%2F%2Fwww.google.com',
         { credentials: 'include' }
       );
 
       const text = await response.text();
 
-      // Extract JSON from postMessage call
-      const match = text.match(/postMessage\('(.*)'\s*,\s*'https:/);
+      // Extract JSON from postMessage call (non-greedy [^']* like original)
+      const match = text.match(/postMessage\('([^']*)'\s*,\s*'https:/);
       if (!match) return [];
 
       // Decode escaped characters
@@ -400,12 +413,21 @@ async function handleMessage(request, sender) {
       return await createNotebook(params.title, params.emoji);
 
     case 'add-source':
+      if (params.notebookId == null || params.url == null) {
+        return { error: 'Missing parameters: notebookId, url' };
+      }
       return await addSource(params.notebookId, params.url);
 
     case 'add-sources':
+      if (params.notebookId == null || !Array.isArray(params.urls)) {
+        return { error: 'Missing parameters: notebookId, urls (array)' };
+      }
       return await addSources(params.notebookId, params.urls);
 
     case 'add-text-source':
+      if (params.notebookId == null) {
+        return { error: 'Missing parameters: notebookId' };
+      }
       return await addTextSource(params.notebookId, params.text, params.title);
 
     case 'get-current-tab':
@@ -421,15 +443,27 @@ async function handleMessage(request, sender) {
       return await saveToNotebookLMOriginal(params.title, params.urls, params.currentURL, params.notebookID);
 
     case 'get-notebook':
+      if (params.notebookId == null) {
+        return { error: 'Missing parameters: notebookId' };
+      }
       return await getNotebook(params.notebookId);
 
     case 'get-sources':
+      if (params.notebookId == null) {
+        return { error: 'Missing parameters: notebookId' };
+      }
       return await getSources(params.notebookId);
 
     case 'delete-source':
+      if (params.notebookId == null || params.sourceId == null) {
+        return { error: 'Missing parameters: notebookId, sourceId' };
+      }
       return await deleteSource(params.notebookId, params.sourceId);
 
     case 'delete-sources':
+      if (params.notebookId == null || !Array.isArray(params.sourceIds)) {
+        return { error: 'Missing parameters: notebookId, sourceIds (array)' };
+      }
       return await deleteSources(params.notebookId, params.sourceIds);
 
     default:

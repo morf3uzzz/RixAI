@@ -160,8 +160,8 @@ async function loadNotebooks() {
     } else {
       const sourcesText = I18n ? I18n.get('common_sources') : 'sources';
       notebookSelect.innerHTML = notebooks.map(nb => `
-        <option value="${nb.id}" ${nb.id === lastNotebook ? 'selected' : ''}>
-          ${nb.emoji} ${nb.name} (${nb.sources} ${sourcesText})
+        <option value="${escapeHtml(String(nb.id))}" ${nb.id === lastNotebook ? 'selected' : ''}>
+          ${escapeHtml(String(nb.emoji || ''))} ${escapeHtml(nb.name || '')} (${nb.sources} ${sourcesText})
         </option>
       `).join('');
     }

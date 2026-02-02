@@ -95,13 +95,17 @@ function detectYouTubePageType(url) {
   youtubePageType = null;
   youtubeVideoUrls = [];
 
-  if (!url.includes('youtube.com')) {
+  if (!url || !url.includes('youtube.com')) {
     return;
   }
 
-  // Check for playlist context first (even when watching a video from playlist)
-  const urlObj = new URL(url);
-  const hasPlaylistParam = urlObj.searchParams.has('list');
+  let hasPlaylistParam = false;
+  try {
+    const urlObj = new URL(url);
+    hasPlaylistParam = urlObj.searchParams.has('list');
+  } catch (_) {
+    return;
+  }
 
     if (url.includes('/playlist')) {
     // Dedicated playlist page
@@ -261,7 +265,9 @@ async function handleAddToNotebook() {
 
         setTimeout(() => {
           const notebook = notebooks.find(n => n.id === notebookId);
-          showSuccessWithActions(notebook, videoUrls.length);
+          if (notebook) {
+            showSuccessWithActions(notebook, videoUrls.length);
+          }
         }, 500);
       }
     } else {
@@ -284,7 +290,9 @@ async function handleAddToNotebook() {
 
         setTimeout(() => {
           const notebook = notebooks.find(n => n.id === notebookId);
-          showSuccessWithActions(notebook);
+          if (notebook) {
+            showSuccessWithActions(notebook);
+          }
         }, 500);
       }
     }
@@ -315,12 +323,11 @@ async function getYouTubeVideoUrls() {
   }
 }
 
-// Function to be injected into YouTube page to extract video URLs
+// Function to be injected into YouTube page to extract video URLs (original add_to_NotebookLM logic)
 function extractYouTubeUrls(pageType) {
   const urls = [];
 
   if (pageType === 'playlist') {
-    // Dedicated playlist page - videos are in the main content
     const videos = document.querySelectorAll('ytd-playlist-video-renderer a#video-title');
     videos.forEach(video => {
       const href = video.getAttribute('href');
@@ -332,13 +339,9 @@ function extractYouTubeUrls(pageType) {
       }
     });
   } else if (pageType === 'playlist_video') {
-    // Watching a video from playlist - playlist is in the sidebar panel
-    // Try multiple selectors for different YouTube layouts
     const selectors = [
-      // New YouTube layout - playlist panel
       'ytd-playlist-panel-renderer ytd-playlist-panel-video-renderer a#wc-endpoint',
       'ytd-playlist-panel-renderer a#video-title',
-      // Alternative selectors
       '#playlist-items ytd-playlist-panel-video-renderer a',
       'ytd-watch-flexy ytd-playlist-panel-video-renderer a#wc-endpoint'
     ];
@@ -356,11 +359,10 @@ function extractYouTubeUrls(pageType) {
             urls.push(url.toString());
           }
         });
-        break; // Found videos, stop trying other selectors
+        break;
       }
     }
 
-    // If no videos found in sidebar, try the mini-playlist
     if (urls.length === 0) {
       const miniPlaylist = document.querySelectorAll('#items ytd-playlist-panel-video-renderer a');
       miniPlaylist.forEach(video => {
@@ -374,7 +376,6 @@ function extractYouTubeUrls(pageType) {
       });
     }
   } else if (pageType === 'channel') {
-    // Get videos from channel page
     const videos = document.querySelectorAll('ytd-rich-grid-media a#video-title-link, ytd-grid-video-renderer a#video-title');
     videos.forEach(video => {
       const href = video.getAttribute('href');
@@ -384,7 +385,6 @@ function extractYouTubeUrls(pageType) {
     });
   }
 
-  // Remove duplicates and limit to 50
   return [...new Set(urls)].slice(0, 50);
 }
 
@@ -399,14 +399,14 @@ function showSuccessWithActions(notebook, videoCount = null) {
   statusDiv.innerHTML = `
     <div>${Icons.check} ${addedToText} "${notebook.emoji} ${notebook.name}"</div>
     <div class="success-actions">
-      <button class="btn btn-secondary" id="open-notebook-btn">
+      <button class="btn btn-secondary" id="success-open-notebook-btn">
         ${openNotebookText}
       </button>
     </div>
   `;
 
   // Add click listener (CSP doesn't allow inline onclick)
-  document.getElementById('open-notebook-btn').addEventListener('click', () => {
+  document.getElementById('success-open-notebook-btn').addEventListener('click', () => {
     chrome.tabs.create({ url: notebookUrl });
   });
 }
@@ -537,6 +537,8 @@ function showStatus(type, message) {
 
   if (type === 'loading') {
     statusDiv.innerHTML = `<div class="spinner"></div>${message}`;
+  } else if (type === 'success' || type === 'error') {
+    statusDiv.innerHTML = message;
   } else {
     statusDiv.textContent = message;
   }
